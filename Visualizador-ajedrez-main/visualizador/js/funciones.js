@@ -1,8 +1,8 @@
 var contadorPaso = 0;
-var turno=true;
-var i=0;
-var j=0;
-/*True es para las blancas y false para las negras*/ 
+var turno = true;
+var i = 0;
+var j = 0;
+/*True es para las blancas y false para las negras*/
 
 function iniciar() {
   var celdas = document.getElementById("Tablero");
@@ -125,61 +125,56 @@ function cargarPartida() {
   scanner.readAsText(archivo);
 }
 
-async function  pasoApaso() {
+ function pasoApaso() {
   var celdas = document.getElementById("texto").value;
-  /*celdas.rows[2].cells[1].style = "background-image: none; background-size:cover;";
-  celdas.rows[3].cells[1].style = "background-image: url(./img/PeonN.png); background-size:cover;";
-  switch(contadorPaso){
-    case 0:
-      celdas.rows[2].cells[1].style = "background-image: none; background-size:cover;";
-      celdas.rows[3].cells[1].style = "background-image: url(./img/PeonN.png); background-size:cover;";
-      break;
-    case 1:
-      celdas.rows[2].cells[2].style = "background-image: none; background-size:cover;";
-      celdas.rows[3].cells[2].style = "background-image: url(./img/PeonN.png); background-size:cover;";
-      break;
-  }
-  contadorPaso++;*/
-
   var tabla = document.getElementById("Tablero");
-  var lineas = celdas.split("\n");
+  //var lineas = celdas.split("\n");
   //for (let i = 0; i < lineas.length; i++) {
-    //alert(lineas[i]);
-    var tokens = lineas[i].split(" ");
-    //for (let j = 1; j < tokens.length; j++) {
-      //alert(tokens[j]);
-      //alert(tieneMayusculas(tokens[j]));
-      j=1;
-      if (!tieneMayusculas(tokens[j])) {
-        //alert("Si soy un Peon y me moví a "+tokens[j]);
-        var posicion = tokens[j].split(/(\d+)/);
-        //El usar alert no se recomienda porque no puedes hacer nada en la página, se recomienda usar el console.log
-        console.log(
-          "Columna " +
-            convertirLetraNumero(posicion[0]) +
-            " renglon " +
-            posicion[1]
-        );
-        var columna = parseInt(convertirLetraNumero(posicion[0]));
-        var renglon = parseInt(posicion[1]);
-        if(turno){
-          tabla.rows[renglon+1].cells[columna+1].style =
-        
-          "background-image: url(./img/PeonB.png); background-size:cover;";
-        }else{
-          tabla.rows[renglon+1].cells[columna+1].style =
-        
-          "background-image: url(./img/PeonN.png); background-size:cover;";
-        
-        } 
-      }
-      turno=!turno;
-      document.getElementById("turno").innerHTML = "Turno de las "+(turno?"blancas ":"negras " )+renglon+" "+columna;
-      await new Promise((resolve) => setTimeout(resolve, 3000)) ;
-    //}
+  //alert(lineas[i]);
+  var tokens = celdas.split(/\s+/);
+ 
+  //alert(tokens[j]);
+  //alert(tieneMayusculas(tokens[j]));
+ 
+  //if (turno) {
+    //j = 1;
+  //} else {
+   // j = 2;
   //}
-i++;
-  
+  /*if (!tieneMayusculas(tokens[j])) {
+    //alert("Si soy un Peon y me moví a "+tokens[j]);
+    var posicion = tokens[j].split(/(\d+)/);
+    //El usar alert no se recomienda porque no puedes hacer nada en la página, se recomienda usar el console.log
+    console.log(
+      "Columna " + convertirLetraNumero(posicion[0]) + " renglon " + posicion[1]
+    );
+    var columna = parseInt(convertirLetraNumero(posicion[0]));
+    var renglon = parseInt(posicion[1]);
+    if (turno) {
+      tabla.rows[renglon + 1].cells[columna + 1].style =
+        "background-image: url(./img/PeonB.png); background-size:cover;";
+    } else {
+      tabla.rows[renglon - 1].cells[columna + 1].style =
+        "background-image: url(./img/PeonN.png); background-size:cover;";
+    }
+  }
+  if (turno == false) {
+    i++;
+  }*/
+  turno = !turno;
+  document.getElementById("turno").innerHTML =
+    "Turno de las " +
+    (turno ? "blancas " : "negras ") +
+    //renglon +
+    " " +
+    //columna +
+    " " +
+    tokens[j];
+  //await new Promise((resolve) => setTimeout(resolve, 3000));
+  //}
+  //}
+  i++;
+  j++;
 }
 
 function tieneMayusculas(cadena) {
@@ -221,11 +216,11 @@ function convertirLetraNumero(letra) {
   }
 }
 
-async function test() {
+/*async function test() {
   var salida = "";
   for (let i = 0; i < 10; i++) {
     await new Promise((resolve) => setTimeout(resolve, 1000));
     salida += i + "<br>";
     document.getElementById("out").innerHTML = salida;
   }
-}
+}*/
