@@ -1,8 +1,50 @@
 var contadorPaso = 0;
-var turno = true;
-var i = 0;
 var j = 0;
 /*True es para las blancas y false para las negras*/
+var tokens = "", i = 0 , turno = true;
+var texto = "";
+function removernumero() {
+  // var texto = document.getElementById("textarea1").value;
+  //document.getElementById("textarea2").innerHTML = texto.replace(/\d+\.\s*/g, ''); 
+   texto = document.getElementById("textarea1").value.replace(/\d+\.\s*/g, '');
+}
+function getTokens() {
+  tokens = texto.split(/\s+/);
+
+  //var salida = "";
+  //for (let i = 0; i < tokens.length; i++) {
+//salida += tokens[i] + "\n"
+      
+  //}
+  //document.getElementById("out").innerHTML = salida;
+}
+function pasos(){
+  var pieza="";
+  if (!tieneMayusculas(tokens[i])) {
+    pieza="peon";
+  }
+  else if(tokens[i].startsWith("N")){
+    pieza="caballo";
+  }
+  else if(tokens[i].startsWith("B")){
+    pieza="Alfil";
+  }
+  else if(tokens[i].startsWith("K")){
+    pieza="Rey";
+  }
+  else if(tokens[i].startsWith("Q")){
+    pieza="Reina";
+  }
+  else if(tokens[i].startsWith("R")){
+    pieza="Torre";
+  }
+  else if(tokens[i].startsWith("O")){
+    pieza="Enroque";
+  }
+  document.getElementById("turno").innerHTML = "Movimiento: " + (i + 1) 
+  + " Turno " + (turno == true ? "blancas " : " negras ")+ tokens[i++]+ " "+ pieza;
+  turno = !turno;
+}
 
 function iniciar() {
   var celdas = document.getElementById("Tablero");
@@ -123,6 +165,8 @@ function cargarPartida() {
     /*document.getElementById("texto").value = document.getElementById("cargarBoton").files;*/
   };
   scanner.readAsText(archivo);
+  removernumero();
+  getTokens();
 }
 
  function pasoApaso() {
